@@ -13,6 +13,21 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   String name = "";
   bool changeState = false;
+  final _formkey = GlobalKey<FormState>();
+
+
+  moveToHome(BuildContext context) async {
+    if (_formkey.currentState!.validate()) {
+      setState(() {
+        changeState = true;
+      });
+      await Future.delayed(Duration(seconds: 1));
+      await Navigator.pushNamed(context, MyRoutes.HomeRoutes);
+      setState(() {
+        changeState = false;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +40,7 @@ class _LoginPageState extends State<LoginPage> {
             height: 60.0,
           ),
           Image.asset(
-            "assets/images/login_image.png",
+            "assets/images/hey.png",
             fit: BoxFit.cover,
           ),
           const SizedBox(
@@ -42,53 +57,78 @@ class _LoginPageState extends State<LoginPage> {
           Padding(
             padding:
                 const EdgeInsets.symmetric(vertical: 10.0, horizontal: 30.0),
-            child: Column(
-              children: [
-                TextFormField(
-                  decoration: const InputDecoration(
-                    hintText: "Enter username",
-                    labelText: "Username",
-                    focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.red, width: 2.0)),
-                    enabledBorder: OutlineInputBorder(
-                        borderSide:
+            child: Form(
+              key: _formkey,
+              child: Column(
+                children: [
+                  TextFormField(
+                    decoration: const InputDecoration(
+                      hintText: "Enter username",
+                      labelText: "Username",
+                        enabledBorder: OutlineInputBorder(
+                            borderSide:
                             BorderSide(color: Colors.purple, width: 2.0)),
+                        focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.orange, width: 2.0)),
+
+                        errorBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.red,width: 2.0)
+                        ),
+                        focusedErrorBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.red,width: 2.0)
+                        )
+                    ),
+                    validator: (value){
+                      if(value!.isEmpty){
+                        return "Username can't be empty";
+                      }
+                      return null;
+                    },
+                    onChanged: (value) {
+                      setState(() {
+                        name = value;
+                      });
+                    },
                   ),
-                  onChanged: (value) {
-                    setState(() {
-                      name = value;
-                    });
-                  },
-                ),
-                SizedBox(
-                  height: 10.0,
-                ),
-                TextFormField(
-                  obscureText: true,
-                  decoration: const InputDecoration(
-                    hintText: "Enter password",
-                    labelText: "Password",
-                    focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.red, width: 2.0)),
-                    enabledBorder: OutlineInputBorder(
-                        borderSide:
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                  TextFormField(
+                    obscureText: true,
+                    decoration: const InputDecoration(
+                      hintText: "Enter password",
+                      labelText: "Password",
+                        enabledBorder: OutlineInputBorder(
+                            borderSide:
                             BorderSide(color: Colors.purple, width: 2.0)),
-                  ),
-                )
-              ],
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.orange, width: 2.0)),
+
+                        errorBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.red,width: 2.0)
+                        ),
+                      focusedErrorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.red,width: 2.0)
+                      )
+                    ),
+                      validator: (value){
+                        if(value!.isEmpty){
+                          return "Password can't be empty";
+                        }else if(value.length<6){
+                          return "Password length should be at least 6";
+                        }
+                        return null;
+                      }
+                  )
+                ],
+              ),
             ),
           ),
           const SizedBox(
             height: 20.0,
           ),
           InkWell(
-              onTap: () async {
-                setState(() {
-                  changeState = true;
-                });
-               await Future.delayed(Duration(seconds: 1));
-                Navigator.pushNamed(context, MyRoutes.HomeRoutes);
-              },
+              onTap: () => moveToHome(context),
               child: AnimatedContainer(
                 duration: Duration(seconds: 1),
                 alignment: Alignment.center,
