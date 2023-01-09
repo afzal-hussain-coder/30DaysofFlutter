@@ -13,9 +13,11 @@ class ItemWidgets extends StatelessWidget {
         onTap: () {
           print("${item.name} pressed");
         },
-        leading: CircleAvatar(backgroundImage: NetworkImage(item.image)),
+        leading: Image.network(item.image),
+       // CircleAvatar(backgroundImage: NetworkImage(item.image),backgroundColor: Colors.transparent,),
+
         title: Text(item.name),
-        subtitle: Text(item.des),
+        subtitle: Text(item.desc),
         trailing: Text("\$${item.price.toString()
         }", style: TextStyle(color: Colors.deepPurple,fontWeight: FontWeight.bold),),
       ),
