@@ -22,5 +22,8 @@ class MyThemeData {
        )
    );
 
+   static Color creamswhite=Color(0xfff5f5f5);
+   static Color darkBluishColor = Color(0xff403b58);
+
 
 }
