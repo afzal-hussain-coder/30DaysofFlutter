@@ -3,12 +3,15 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_new_project/Utils/routes.dart';
+import 'package:flutter_new_project/models/cart.dart';
 import 'package:flutter_new_project/models/catalog.dart';
 import 'package:flutter_new_project/pages/details_page.dart';
 import 'package:flutter_new_project/widgets/drawer.dart';
 import 'package:flutter_new_project/widgets/itemwidgets.dart';
 import 'package:flutter_new_project/widgets/theme.dart';
 import 'package:velocity_x/velocity_x.dart';
+
+import '../widgets/add_to_cart.dart';
 
 
  class HomePage extends StatefulWidget {
@@ -132,14 +135,7 @@ class CatalogItem extends StatelessWidget {
                 buttonPadding: EdgeInsets.zero,
                 children: [
                   "\$${catalog.price}".text.red400.xl.bold.make(),
-                  ElevatedButton(onPressed: () {
-
-                  },
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(context.theme.buttonColor),
-                        shape: MaterialStateProperty.all(const StadiumBorder())
-                      ),
-                      child: "Add to cart".text.make())
+                 AddtoCart(catalog:catalog)
                 ],
               )
           ],).px8())
@@ -160,6 +156,9 @@ class ProductImage extends StatelessWidget {
     return Image.network(catalog.image).box.rounded.p8.color(context.canvasColor).make().w32(context);
   }
 }
+
+
+
 
 
 

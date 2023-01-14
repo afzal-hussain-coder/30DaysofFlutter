@@ -10,6 +10,10 @@ class MyThemeData {
           canvasColor: creamswhite,
           buttonColor: darkBluishColor,
         accentColor: darkBluishColor,
+        snackBarTheme: SnackBarThemeData(
+          backgroundColor: Colors.black,
+          contentTextStyle: TextStyle(color: Colors.white)
+        ),
         appBarTheme:  const AppBarTheme(
           elevation: 0.0,
           backgroundColor: Colors.white,
@@ -29,11 +33,16 @@ class MyThemeData {
            canvasColor: darkCreamColor,
            buttonColor: lightBluishColor,
            accentColor: Colors.white,
+         snackBarTheme: SnackBarThemeData(
+             backgroundColor: Colors.white,
+             contentTextStyle: TextStyle(color: Colors.black)
+         ),
            appBarTheme:  const AppBarTheme(
                elevation: 0.0,
                backgroundColor: Colors.black,
                iconTheme: IconThemeData(color: Colors.white),
-               titleTextStyle: TextStyle(color: Colors.black,fontSize: 20.0)
+               titleTextStyle: TextStyle(color: Colors.white,fontSize: 20.0),
+
        )
    )
    );
